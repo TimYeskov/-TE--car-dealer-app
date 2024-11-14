@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Link from "next/link"; // Импортируем компонент Link
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export interface IMake {
   MakeId: number;
@@ -11,8 +11,8 @@ export interface IMake {
 }
 export default function Home() {
   const [makes, setMakes] = useState([] as IMake[]);
-  const [selectedMake, setSelectedMake] = useState("" as string);
-  const [selectedYear, setSelectedYear] = useState("" as string);
+  const [selectedMake, setSelectedMake] = useState('' as string);
+  const [selectedYear, setSelectedYear] = useState('' as string);
   const [years] = useState(() => {
     const currentYear = new Date().getFullYear();
     return Array.from({ length: currentYear - 2015 + 1 }, (_, i) => 2015 + i);
@@ -20,11 +20,11 @@ export default function Home() {
 
   useEffect(() => {
     fetch(
-      "https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json"
+      'https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json'
     )
       .then((response) => response.json())
       .then((data) => setMakes(data.Results || []))
-      .catch((error) => console.error("Error fetching makes:", error));
+      .catch((error) => console.error('Error fetching makes:', error));
   }, []);
 
   return (
@@ -80,15 +80,15 @@ export default function Home() {
             href={
               selectedMake && selectedYear
                 ? `/result/${selectedMake}/${selectedYear}`
-                : "#"
+                : '#'
             }
             passHref
           >
             <button
               className={`w-full py-2 rounded ${
                 !selectedMake || !selectedYear
-                  ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-blue-500 text-white"
+                  ? 'bg-gray-300 cursor-not-allowed'
+                  : 'bg-blue-500 text-white'
               }`}
               disabled={!selectedMake || !selectedYear}
             >
